@@ -4,7 +4,7 @@ var testInputs = []
 // Create an input class with a randomized integer value
 function inputObj (value){
 	this.name = 'Vivek T.',
-	this.value = value !== undefined ? value : Math.floor(Math.random() * 10)
+	this.value = value !== undefined ? value : Math.floor(Math.random() * 1024)
 };
 // Run a loop to create an array of input objects 
 var createTestInput = function () {
