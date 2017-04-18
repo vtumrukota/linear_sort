@@ -16,7 +16,7 @@ var sortByCounts = function (inputSize) {
 	// Create an input class with a randomized integer value
 	function inputModel (value, inputSize){
 		this.name = 'Vivek T.',
-		this.value = value !== undefined ? value : Math.floor(Math.random() * (inputSize + 1))
+		this.value = value !== undefined ? value : Math.floor(Math.random() * inputSize)
 	};
 
 	var testInput = createTestInput(inputModel, inputSize);
@@ -26,7 +26,7 @@ var sortByCounts = function (inputSize) {
 	var resultIdx = 0;
 
 	// Initialize all occurrences of the integer value to 0
-	for(var i=0; i < testInput.length; i++){
+	for(var i=0; i <= testInput.length; i++){
 		countArray[i] = 0;
 	}
 	// First create an array to keep track of the frequency of each integer value
@@ -34,6 +34,7 @@ var sortByCounts = function (inputSize) {
 	for(var j=0; j < testInput.length; j++) {
 		countArray[testInput[j].value] += 1;
 	}
+
 	for(var k=0; k < countArray.length; k++) {
 		var count = countArray[k];
 		
