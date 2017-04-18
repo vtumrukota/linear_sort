@@ -1,15 +1,23 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Algorithm to sort an array of objects by its 'value' prop
 //////////////////////////////////////////////////////////////////////////////////
-var sortByCounts = function (inputSize) {
+
+// inputType can be either 'array' or if nothing is passed, it will become an object 
+// with a name and value prop, and the sort will be on the value.
+var sortByCounts = function (inputSize, inputType) {
 
 	// Run a loop to create an array of input objects 
-	var createTestInput = function (inputModel, inputSize) {
+	var createTestInput = function (inputModel, inputSize, inputType) {
 		var testInputs = [];
 
 		for (var i = 0; i < inputSize; i++) {
-			testInputs[i] = new inputModel(undefined, inputSize);
+			if (inputType === 'array') {
+				testInputs[i] = Math.floor(Math.random() * inputSize);
+			} else {
+				testInputs[i] = new inputModel(undefined, inputSize);
+			}
 		}
+
 		return testInputs;
 	};
 
@@ -19,8 +27,8 @@ var sortByCounts = function (inputSize) {
 		this.value = value !== undefined ? value : Math.floor(Math.random() * inputSize)
 	};
 
-	var testInput = createTestInput(inputModel, inputSize);
-
+	var testInput = createTestInput(inputModel, inputSize, inputType);
+	console.log('Test Input :', testInput);
 	var countArray = [];
 	var sortedResult = [];
 	var resultIdx = 0;
@@ -32,7 +40,11 @@ var sortByCounts = function (inputSize) {
 	// First create an array to keep track of the frequency of each integer value
 	// from 0 to 1023 using the array index to represent the value.
 	for(var j=0; j < testInput.length; j++) {
-		countArray[testInput[j].value] += 1;
+		if (inputType === 'array') {
+			countArray[testInput[j]] += 1;
+		} else {
+			countArray[testInput[j].value] += 1;
+		}
 	}
 
 	for(var k=0; k < countArray.length; k++) {
@@ -43,7 +55,11 @@ var sortByCounts = function (inputSize) {
 			
 			// Since we don't care about the string value, we can just create a new array of
 			// objects with the corresponding integer value
-			sortedResult[resultIdx] = new inputModel(k);
+			if(inputType === 'array') {
+				sortedResult[resultIdx] = k;
+			} else {
+				sortedResult[resultIdx] = new inputModel(k);
+			}
 			resultIdx++;
 		}
 	}
@@ -55,5 +71,5 @@ var sortByCounts = function (inputSize) {
 };
 
 //////////////////////////////////////////////////////////////////////////////////
-sortByCounts(1024);
+sortByCounts(10000000, 'array');
 
