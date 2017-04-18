@@ -34,7 +34,7 @@ var sortByCounts = function (inputSize) {
 	for(var j=0; j < testInput.length; j++) {
 		countArray[testInput[j].value] += 1;
 	}
-	for(var k=0; k <= countArray.length; k++) {
+	for(var k=0; k < countArray.length; k++) {
 		var count = countArray[k];
 		
 		// Add the number of times this integer occurs (count) into the result
@@ -49,10 +49,10 @@ var sortByCounts = function (inputSize) {
 	// Although we use a nested loop, we only iterate through each unique number and then again by
 	// its frequency. Because of this split, we end up with the same length in our sorted array as the
 	// number of inputs making it O(n) time complexity.
-	console.log('Sorted Result: ', sortedResult);
+	console.log('Sorted Result: ', sortedResult, 'length', sortedResult.length);
 	return sortedResult;
 };
 
 //////////////////////////////////////////////////////////////////////////////////
-sortByCounts(100000);
+sortByCounts(1024);
 
