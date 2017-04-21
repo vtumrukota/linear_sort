@@ -12,9 +12,9 @@ var sortByCounts = function (inputSize, inputType) {
 
 		for (var i = 0; i < inputSize; i++) {
 			if (inputType === 'array') {
-				testInputs[i] = Math.floor(Math.random() * inputSize);
+				testInputs[i] = Math.floor(Math.random() * 1024);
 			} else {
-				testInputs[i] = new inputModel(undefined, inputSize);
+				testInputs[i] = new inputModel();
 			}
 		}
 
@@ -22,9 +22,9 @@ var sortByCounts = function (inputSize, inputType) {
 	};
 
 	// Create an input class with a randomized integer value
-	function inputModel (value, inputSize){
+	function inputModel (value){
 		this.name = 'Vivek T.',
-		this.value = value !== undefined ? value : Math.floor(Math.random() * inputSize)
+		this.value = value !== undefined ? value : Math.floor(Math.random() * 1024)
 	};
 
 	var testInput = createTestInput(inputModel, inputSize, inputType);
@@ -34,12 +34,17 @@ var sortByCounts = function (inputSize, inputType) {
 	var resultIdx = 0;
 
 	// Initialize all occurrences of the integer value to 0
-	for(var i=0; i <= testInput.length; i++){
-		countArray[i] = 0;
+	for (var i=0; i < testInput.length; i++){
+		if (inputType === 'array') {
+			countArray[testInput[i]] = 0;
+		} else {
+			countArray[testInput[i].value] = 0;
+		}
 	}
+	console.log('count arr', countArray);
 	// First create an array to keep track of the frequency of each integer value
 	// from 0 to 1023 using the array index to represent the value.
-	for(var j=0; j < testInput.length; j++) {
+	for (var j=0; j < testInput.length; j++) {
 		if (inputType === 'array') {
 			countArray[testInput[j]] += 1;
 		} else {
@@ -47,15 +52,15 @@ var sortByCounts = function (inputSize, inputType) {
 		}
 	}
 
-	for(var k=0; k < countArray.length; k++) {
+	for (var k=0; k < countArray.length; k++) {
 		var count = countArray[k];
 		
 		// Add the number of times this integer occurs (count) into the result
-		for(var l=0; l < count; l++) {
+		for (var l=0; l < count; l++) {
 			
 			// Since we don't care about the string value, we can just create a new array of
 			// objects with the corresponding integer value
-			if(inputType === 'array') {
+			if (inputType === 'array') {
 				sortedResult[resultIdx] = k;
 			} else {
 				sortedResult[resultIdx] = new inputModel(k);
